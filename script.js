@@ -1,31 +1,57 @@
-/** Random Cpu */
-function getComputerChoice() {
+function getComputerChoice() {  /**Random ComputerChoice */
     let cpuChoice = ["rock", "paper", "scissors"];
     let randomCpu = Math.floor(Math.random() * cpuChoice.length);
-    return cpuChoice[randomCpu]; 
+    return cpuChoice[randomCpu];
 }
-
-/** Prompt playerChoice*/
-let playerChoice = prompt("Enter Rock, Paper, or Scissors");
-playerChoice = playerChoice.toLowerCase();
-
-/** playerChoice vs cpuChoice */
-function playerSelection(cpuChoice, playerChoice) {
-    if ((playerChoice === "rock" && cpuChoice === "scissors") ||
-        (playerChoice === "paper" && cpuChoice === "rock") ||
-        (playerChoice === "scissors" && cpuChoice === "paper")) {
-        return "You Win, " + playerChoice + " beats " + cpuChoice;
-    } else if (playerChoice === cpuChoice){
-        return "Tie Game, " + playerChoice + " is equal to " + cpuChoice;
+  
+function playRound(playerChoice, cpuChoice) {   /**Match : Player vs Cpu */
+    if (
+      (playerChoice === "rock" && cpuChoice === "scissors") ||
+      (playerChoice === "paper" && cpuChoice === "rock") ||
+      (playerChoice === "scissors" && cpuChoice === "paper")
+    ) {
+      return "You Win, " + playerChoice + " beats " + cpuChoice;
+    } else if (playerChoice === cpuChoice) {
+      return "Tie Game, " + playerChoice + " is equal to " + cpuChoice;
     } else {
-        return "You Loose, " + playerChoice + " is beaten by " + cpuChoice;
+      return "You Loose, " + playerChoice + " is defeated against " + cpuChoice;
     }
-    
 }
-/** Uppercase first Letter playerChoice and cpuChoice */
-playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
-let cpuChoice = getComputerChoice();
-cpuChoice = cpuChoice.charAt(0).toUpperCase() + cpuChoice.slice(1);
-let result = playerSelection(cpuChoice, playerChoice);
+  
+function game() {  /** 5 Rounds Game */
+    let playerScore = 0;
+    let cpuScore = 0;
+    for (let i = 0; i < 5; i++) {
+      let playerChoice = prompt("Enter Rock, Paper, or Scissors");
+      playerChoice = playerChoice.toLowerCase(); /**Non sensitive  */
+  
+      let cpuChoice = getComputerChoice();
 
-console.log(result);
+      playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);/** Uppercase playerChoice */
+      cpuChoice = cpuChoice.charAt(0).toUpperCase() + cpuChoice.slice(1); /**Uppercase cpuChoice */
+  
+      let result = playRound(playerChoice, cpuChoice);
+      
+
+      console.log(result);
+  
+      if (result.includes("Win")) {
+        playerScore++;
+      } else if (result.includes("Loose")) {
+        cpuScore++;
+      }
+    }
+  
+    console.log("Player Score: " + playerScore);
+    console.log("CPU Score: " + cpuScore);
+  
+    if (playerScore > cpuScore) {
+        console.log("Congratulations, you won the game!");
+    } else if (playerScore === cpuScore) {
+        console.log("The game is tied.");
+    } else {
+        console.log("Sorry, you lost the game.");
+    }
+}
+
+game();
