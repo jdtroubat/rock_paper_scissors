@@ -1,7 +1,17 @@
+const resultElement = document.getElementById("result");
+const scoreElement = document.getElementById("score");
+let playerScore = 0;
+let cpuScore = 0;
+
 document.addEventListener("DOMContentLoaded", function() {   //Buttons
   const rockBtn = document.getElementById("rock");
   const paperBtn = document.getElementById("paper");
   const scissorsBtn= document.getElementById("scissors");
+
+  
+  
+  updateScore();
+
 
   rockBtn.addEventListener("click", function() {
     playRound("rock");
@@ -22,57 +32,64 @@ function getComputerChoice() {  /**Random ComputerChoice */
     let randomCpu = Math.floor(Math.random() * computerSelection.length);
     return computerSelection[randomCpu];
 }
+
+function playRound(playerSelection) {
+  const resultElement = document.getElementById("result");
+  const scoreElement = document.getElementById("score");
+
+  let computerSelection = getComputerChoice();
+  let result = getResult(playerSelection, computerSelection);
+  resultElement.textContent = result;
+
+  if(result.includes("Win")) {
+    playerScore++;
+  } else if(result.includes("Lose")){
+    cpuScore++;
+  }
+  updateScore();
   
-function playRound(playerSelection, computerSelection) {   /**Match : Player vs Cpu */
-    if (
-      (playerSelection === "rock" && computerSelection === "scissors") ||
-      (playerSelection === "paper" && computerSelection === "rock") ||
-      (playerSelection === "scissors" && computerSelection === "paper")
-    ) {
-      return "You Win, " + playerSelection + " beats " + computerSelection;
-    } else if (playerSelection === computerSelection) {
-      return "Tie Game, " + playerSelection + " is equal to " + computerSelection;
-    } else {
-      return "You Loose, " + playerSelection + " is defeated against " + computerSelection;
-    }
+  if (playerScore >=5 || cpuScore >=5) {
+    announceWinner();
+  }
 }
 
-function game() {  /** 5 Rounds Game */
-    let playerScore = 0;
-    let cpuScore = 0;
-    for (let i = 0; i < 5; i++) {
-      let playerSelection = prompt("Enter Rock, Paper, or Scissors");
-      playerSelection = playerSelection.toLowerCase(); /**Non sensitive  */
-  
-      let computerSelection = getComputerChoice();
-
-      playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);/** Uppercase playerSelection */
-      computerSelection = computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1); /**Uppercase computerSelection */
-  
-      let result = playRound(playerSelection, computerSelection);
-      
-
-      console.log(result);
-  
-      if (result.includes("Win")) {
-        playerScore++;
-      } else if (result.includes("Loose")) {
-        cpuScore++;
-      }
-    }
-  
-    console.log("Player Score: " + playerScore);
-    console.log("CPU Score: " + cpuScore);
-  
-    if (playerScore > cpuScore) {
-        console.log("Congratulations, you won the game!");
-    } else if (playerScore === cpuScore) {
-        console.log("The game is tied.");
-    } else {
-        console.log("Sorry, you lost the game.");
-    }
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
+  
+function getResult(playerSelection, computerSelection) {
+  const capitalizedPlayerSelection = capitalizeFirstLetter(playerSelection);
+  const capitalizedComputerSelection = capitalizeFirstLetter(computerSelection);
 
-game();
+  if (
+    (playerSelection === "rock" && computerSelection === "scissors") ||
+    (playerSelection === "paper" && computerSelection === "rock") ||
+    (playerSelection === "scissors" && computerSelection === "paper")
+  ) {
+    return "You Win, " + capitalizedPlayerSelection + " beats " + capitalizedComputerSelection;
+  } else if (playerSelection === computerSelection) {
+    return "Tie Game, " + capitalizedPlayerSelection + " is equal to " + capitalizedComputerSelection;
+  } else {
+    return "You Lose, " + capitalizedPlayerSelection + " is defeated against " + capitalizedComputerSelection;
+  }
+}
+   
+function updateScore() {
+  scoreElement.textContent = "Player Score: " + playerScore + " - CPU Score: " + cpuScore;
+}
+    
+function announceWinner() {
+  if (playerScore > cpuScore) {
+    resultElement.textContent = "Congratulations, you won the game";
+  } else if (playerScore === cpuScore) {
+    resultElement.textContent = "The game is tied";
+  } else {
+    resultElement.textContent = "Sorry, you lost the game";
+  }
+    
+  playerScore = 0;
+  cpuScore = 0;
+  updateScore();
+}
 
 
