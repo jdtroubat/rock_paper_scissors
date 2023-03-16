@@ -66,11 +66,11 @@ function getResult(playerSelection, computerSelection) {
     (playerSelection === "paper" && computerSelection === "rock") ||
     (playerSelection === "scissors" && computerSelection === "paper")
   ) {
-    return "You Win, " + capitalizedPlayerSelection + " beats " + capitalizedComputerSelection;
+    return "You Win : " + capitalizedPlayerSelection + " beats " + capitalizedComputerSelection;
   } else if (playerSelection === computerSelection) {
-    return "Tie Game, " + capitalizedPlayerSelection + " is equal to " + capitalizedComputerSelection;
+    return "Tie Game : " + capitalizedPlayerSelection + " is equal to " + capitalizedComputerSelection;
   } else {
-    return "You Lose, " + capitalizedPlayerSelection + " is defeated against " + capitalizedComputerSelection;
+    return "You Lose : " + capitalizedPlayerSelection + " loose against " + capitalizedComputerSelection;
   }
 }
    
@@ -80,11 +80,11 @@ function updateScore() {
     
 function announceWinner() {
   if (playerScore > cpuScore) {
-    resultElement.textContent = "Congratulations, you won the game";
+    resultElement.textContent = "Congratulations : You Won the Game";
   } else if (playerScore === cpuScore) {
-    resultElement.textContent = "The game is tied";
+    resultElement.textContent = "The Game is Tied";
   } else {
-    resultElement.textContent = "Sorry, you lost the game";
+    resultElement.textContent = "Sorry : You Lost the Game";
   }
     
   playerScore = 0;
