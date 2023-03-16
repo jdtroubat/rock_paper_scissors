@@ -1,36 +1,55 @@
+document.addEventListener("DOMContentLoaded", function() {   //Buttons
+  const rockBtn = document.getElementById("rock");
+  const paperBtn = document.getElementById("paper");
+  const scissorsBtn= document.getElementById("scissors");
+
+  rockBtn.addEventListener("click", function() {
+    playRound("rock");
+  });
+
+  paperBtn.addEventListener("click", function() {
+    playRound("paper");
+  });
+
+  scissorsBtn.addEventListener("click", function() {;
+    playRound("scissors")
+  });
+});
+
+
 function getComputerChoice() {  /**Random ComputerChoice */
-    let cpuChoice = ["rock", "paper", "scissors"];
-    let randomCpu = Math.floor(Math.random() * cpuChoice.length);
-    return cpuChoice[randomCpu];
+    let computerSelection = ["rock", "paper", "scissors"];
+    let randomCpu = Math.floor(Math.random() * computerSelection.length);
+    return computerSelection[randomCpu];
 }
   
-function playRound(playerChoice, cpuChoice) {   /**Match : Player vs Cpu */
+function playRound(playerSelection, computerSelection) {   /**Match : Player vs Cpu */
     if (
-      (playerChoice === "rock" && cpuChoice === "scissors") ||
-      (playerChoice === "paper" && cpuChoice === "rock") ||
-      (playerChoice === "scissors" && cpuChoice === "paper")
+      (playerSelection === "rock" && computerSelection === "scissors") ||
+      (playerSelection === "paper" && computerSelection === "rock") ||
+      (playerSelection === "scissors" && computerSelection === "paper")
     ) {
-      return "You Win, " + playerChoice + " beats " + cpuChoice;
-    } else if (playerChoice === cpuChoice) {
-      return "Tie Game, " + playerChoice + " is equal to " + cpuChoice;
+      return "You Win, " + playerSelection + " beats " + computerSelection;
+    } else if (playerSelection === computerSelection) {
+      return "Tie Game, " + playerSelection + " is equal to " + computerSelection;
     } else {
-      return "You Loose, " + playerChoice + " is defeated against " + cpuChoice;
+      return "You Loose, " + playerSelection + " is defeated against " + computerSelection;
     }
 }
-  
+
 function game() {  /** 5 Rounds Game */
     let playerScore = 0;
     let cpuScore = 0;
     for (let i = 0; i < 5; i++) {
-      let playerChoice = prompt("Enter Rock, Paper, or Scissors");
-      playerChoice = playerChoice.toLowerCase(); /**Non sensitive  */
+      let playerSelection = prompt("Enter Rock, Paper, or Scissors");
+      playerSelection = playerSelection.toLowerCase(); /**Non sensitive  */
   
-      let cpuChoice = getComputerChoice();
+      let computerSelection = getComputerChoice();
 
-      playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);/** Uppercase playerChoice */
-      cpuChoice = cpuChoice.charAt(0).toUpperCase() + cpuChoice.slice(1); /**Uppercase cpuChoice */
+      playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);/** Uppercase playerSelection */
+      computerSelection = computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1); /**Uppercase computerSelection */
   
-      let result = playRound(playerChoice, cpuChoice);
+      let result = playRound(playerSelection, computerSelection);
       
 
       console.log(result);
@@ -55,3 +74,5 @@ function game() {  /** 5 Rounds Game */
 }
 
 game();
+
+
