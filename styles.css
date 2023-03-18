@@ -1,7 +1,35 @@
-h1,
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffc952;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    color: #47b8e0;
+    font-weight: 700;
+    font-size: 54px;
+    text-shadow: 2px 2px 0px #34314c;
+    margin-bottom: 30px;
+}
+
 #buttons {
     display: flex;
     justify-content: center;
+}
+
+#rock,
+#paper,
+#scissors {
+    color: #ffc952;
+    background-color: #47b8e0;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
 }
 
 #container {
@@ -10,6 +38,28 @@ h1,
     flex-direction: column;
 }
 
-p {
-    display: flex;    
+#result,
+#score {
+    font-weight: 900;
+    font-size: 24px;
+}
+
+#result {
+    color:#e25f5f;
+    text-shadow: 2px 2px 0px #34314c;
+}
+
+#score {
+    color: #34314c;
+    text-shadow: 2px 2px 0px #e25f5f;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    font-style: italic;
+    margin-top: 40px;
 }

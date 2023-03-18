@@ -3,15 +3,12 @@ const scoreElement = document.getElementById("score");
 let playerScore = 0;
 let cpuScore = 0;
 
-document.addEventListener("DOMContentLoaded", function() {   //Buttons
+document.addEventListener("DOMContentLoaded", function() {
   const rockBtn = document.getElementById("rock");
   const paperBtn = document.getElementById("paper");
   const scissorsBtn= document.getElementById("scissors");
-
-  
-  
+ 
   updateScore();
-
 
   rockBtn.addEventListener("click", function() {
     playRound("rock");
@@ -26,8 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {   //Buttons
   });
 });
 
-
-function getComputerChoice() {  /**Random ComputerChoice */
+function getComputerChoice() {
     let computerSelection = ["rock", "paper", "scissors"];
     let randomCpu = Math.floor(Math.random() * computerSelection.length);
     return computerSelection[randomCpu];
@@ -66,16 +62,16 @@ function getResult(playerSelection, computerSelection) {
     (playerSelection === "paper" && computerSelection === "rock") ||
     (playerSelection === "scissors" && computerSelection === "paper")
   ) {
-    return "You Win : " + capitalizedPlayerSelection + " beats " + capitalizedComputerSelection;
+    return "You Win : " + capitalizedPlayerSelection + " > " + capitalizedComputerSelection;
   } else if (playerSelection === computerSelection) {
-    return "Tie Game : " + capitalizedPlayerSelection + " is equal to " + capitalizedComputerSelection;
+    return "Tie Game : " + capitalizedPlayerSelection + " = " + capitalizedComputerSelection;
   } else {
-    return "You Lose : " + capitalizedPlayerSelection + " loose against " + capitalizedComputerSelection;
+    return "You Lose : " + capitalizedPlayerSelection + " < " + capitalizedComputerSelection;
   }
 }
    
 function updateScore() {
-  scoreElement.textContent = "Player Score: " + playerScore + " - CPU Score: " + cpuScore;
+  scoreElement.textContent = "Player Score : " + playerScore + " | CPU Score : " + cpuScore;
 }
     
 function announceWinner() {
